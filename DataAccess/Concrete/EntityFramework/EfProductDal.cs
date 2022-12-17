@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,22 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public void Add(Product entity)
         {
-            throw new NotImplementedException();
+            using (NorthwindContext context=new())
+            {
+                var entityToAdd= context.Entry(entity);
+                entityToAdd.State=EntityState.Added;
+                context.SaveChanges();
+            }
         }
 
         public void Delete(Product entity)
         {
-            throw new NotImplementedException();
+            using (NorthwindContext context = new())
+            {
+                var entityToDelete = context.Entry(entity);
+                entityToDelete.State = EntityState.Deleted;
+                context.SaveChanges();
+            }
         }
 
         public Product Get(Expression<Func<Product, bool>> filter)
@@ -33,7 +44,12 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Update(Product entity)
         {
-            throw new NotImplementedException();
+            using (NorthwindContext context = new())
+            {
+                var entityToUpdate = context.Entry(entity);
+                entityToUpdate.State = EntityState.Modified;
+                context.SaveChanges();
+            }
         }
     }
 }
