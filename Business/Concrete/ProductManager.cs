@@ -4,10 +4,10 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Abstract;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -26,5 +26,8 @@ namespace Business.Concrete
 
         public List<Product> GetByUnitPrice(decimal min, decimal max)
             => _productDal.GetAll(x => min <= x.UnitPrice && x.UnitPrice <= max);
+
+        public List<ProductDetailDto> GetProductDetails()
+            => _productDal.GetProductDetails();
     }
 }

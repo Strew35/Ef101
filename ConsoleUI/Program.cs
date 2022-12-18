@@ -9,9 +9,14 @@ foreach (var product in productManager.GetAll())
 {
     Console.WriteLine(product.ProductName);
 }
-Console.WriteLine(new string('-',10));
+Console.WriteLine(new string('-', 10));
 CategoryManager categoryManager = new(new EfCategoryDal());
 foreach (var category in categoryManager.GetAll())
 {
     Console.WriteLine(category.CategoryName);
+}
+Console.WriteLine(new string('-', 10));
+foreach (var product in productManager.GetProductDetails())
+{
+    Console.WriteLine(product.CategoryName);
 }
