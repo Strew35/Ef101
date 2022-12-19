@@ -17,9 +17,9 @@ namespace DataAccess.Concrete.InMemory
         {
             _products = new()
             {
-                new(){ProductID=1,ProductName="Elma",UnitPrice=100,CategoryID=1,UnitsInStock=10},
-                new(){ProductID=2,ProductName="Armut",UnitPrice=100,CategoryID=1,UnitsInStock=12},
-                new(){ProductID=3,ProductName="Koltuk",UnitPrice=100,CategoryID=2,UnitsInStock=13}
+                new(){ProductId=1,ProductName="Elma",UnitPrice=100,CategoryId=1,UnitsInStock=10},
+                new(){ProductId=2,ProductName="Armut",UnitPrice=100,CategoryId=1,UnitsInStock=12},
+                new(){ProductId=3,ProductName="Koltuk",UnitPrice=100,CategoryId=2,UnitsInStock=13}
             };
         }
         public void Add(Product product)
@@ -29,7 +29,7 @@ namespace DataAccess.Concrete.InMemory
 
         public void Delete(Product product)
         {
-            Product? productToDelete=_products.FirstOrDefault(p => p.ProductID == product.ProductID);
+            Product? productToDelete=_products.SingleOrDefault(p => p.ProductId == product.ProductId);
             _products.Remove(productToDelete);
         }
 
@@ -50,7 +50,7 @@ namespace DataAccess.Concrete.InMemory
 
         public List<Product> GetAllByCategory(int categoryID)
         {
-            return _products.Where(p=>p.CategoryID== categoryID).ToList();
+            return _products.Where(p=>p.CategoryId== categoryID).ToList();
         }
 
         public List<ProductDetailDto> GetProductDetails()
@@ -60,10 +60,10 @@ namespace DataAccess.Concrete.InMemory
 
         public void Update(Product product)
         {
-            Product? productToUpdate = _products.FirstOrDefault(p => p.ProductID == product.ProductID);
+            Product? productToUpdate = _products.SingleOrDefault(p => p.ProductId == product.ProductId);
             productToUpdate.ProductName=product.ProductName;
             productToUpdate.UnitPrice=product.UnitPrice;
-            productToUpdate.CategoryID=product.CategoryID;
+            productToUpdate.CategoryId=product.CategoryId;
             productToUpdate.UnitsInStock=product.UnitsInStock;
         }
     }

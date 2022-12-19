@@ -22,6 +22,6 @@ namespace Business.Concrete
             => _categoryDal.GetAll();
 
         public Category GetById(int id)
-            => _categoryDal.Get(x => x.CategoryID == id);
+            => _categoryDal.Get(x => x.CategoryId == id);
     }
 }

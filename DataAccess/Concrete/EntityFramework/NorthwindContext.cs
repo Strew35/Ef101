@@ -12,7 +12,7 @@ namespace Core.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=192.168.1.34;Database=Northwind;Trusted_Connection=True;Encrypt=False;");
+            optionsBuilder.UseSqlServer(@"Server=192.168.1.33;Database=Northwind;User Id=sa;Password=12345;Encrypt=False;");
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
