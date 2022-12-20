@@ -2,21 +2,40 @@
 using Business.Concrete;
 using Core.Concrete.EntityFramework;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
+////////////////////////////////////////////////////////
 Console.WriteLine(new string('-', 10));
 ProductManager productManager = new(new EfProductDal());
-foreach (var product in productManager.GetAll())
+var result = productManager.GetAll();
+if (result.Success == true)
 {
-    Console.WriteLine(product.ProductName);
+    foreach (var product in productManager.GetAll().Data)
+    {
+        Console.WriteLine(product.ProductName);
+    }
 }
+else Console.WriteLine(result.Message);
+////////////////////////////////////////////////////////
 Console.WriteLine(new string('-', 10));
 CategoryManager categoryManager = new(new EfCategoryDal());
-foreach (var category in categoryManager.GetAll())
+var result2 = categoryManager.GetAll();
+if (result2.Success == true)
 {
-    Console.WriteLine(category.CategoryName);
+    foreach (var category in result2.Data)
+    {
+        Console.WriteLine(category.CategoryName);
+    }
 }
+else Console.WriteLine(result2.Message);
+////////////////////////////////////////////////////////
 Console.WriteLine(new string('-', 10));
-foreach (var product in productManager.GetProductDetails())
+var result3 = productManager.GetProductDetails();
+if (result3.Success == true)
 {
-    Console.WriteLine(product.CategoryName);
+    foreach (var product in result3.Data)
+    {
+        Console.WriteLine(product.CategoryName);
+    }
 }
+else Console.WriteLine(result3.Message);
