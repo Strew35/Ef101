@@ -5,6 +5,8 @@ using Entities.DTOs;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using Business.Constants;
+using FluentValidation;
+using Business.ValidationRules.FluentValidation;
 
 namespace Business.Concrete
 {
@@ -18,20 +20,38 @@ namespace Business.Concrete
 
         public IResult Add(Product product)
         {
-            if (product.ProductName.Length < 5) return new ErrorResult(Messages.ProductNameInvalid);
-            _productDal.Add(product);
-            return new SuccessResult(Messages.ProductAdded);
+            try
+            {
+                var context=new ValidationContext<Product>(product);
+                ProductValidator productValidatior=new ProductValidator();
+                var result=productValidatior.Validate(context);
+                if (!result.IsValid) throw new ValidationException(result.Errors);
+
+                _productDal.Add(product);
+                return new SuccessResult(Messages.ProductAdded);
+            }
+            catch (Exception ex)
+            {
+                return new ErrorResult(Messages.ProductCouldNotBeAdded);
+            }
         }
 
         public IResult Delete(int id)
         {
-            var entityToDelete = _productDal.Get(x => x.ProductId == id);
-            _productDal.Delete(entityToDelete);
-            return new SuccessResult(Messages.ProductDeleted);
+            try
+            {
+                var entityToDelete = _productDal.Get(x => x.ProductId == id);
+                _productDal.Delete(entityToDelete);
+                return new SuccessResult(Messages.ProductDeleted);
+            }
+            catch (Exception ex)
+            {
+                return new ErrorResult(Messages.ProductCouldNotBeDeleted);
+            }
         }
 
         public IDataResult<List<Product>> GetAll()
-            => new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.ProductsListed);
+            => /*DateTime.Now.Hour==11? new ErrorDataResult<List<Product>>( Messages.MaintanceTime):*/new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.ProductsListed);
 
         public IDataResult<List<Product>> GetByCategoryId(int id)
             => new SuccessDataResult<List<Product>>(_productDal.GetAll(x => x.CategoryId == id), Messages.ProductsListed);
@@ -47,9 +67,16 @@ namespace Business.Concrete
 
         public IResult Update(Product product)
         {
-            if (product.ProductName.Length < 5) return new ErrorResult(Messages.ProductNameInvalid);
-            _productDal.Update(product);
-            return new SuccessResult(Messages.ProductUpdated);
+            try
+            {
+                if (product.ProductName.Length < 5) return new ErrorResult(Messages.ProductNameInvalid);
+                _productDal.Update(product);
+                return new SuccessResult(Messages.ProductUpdated);
+            }
+            catch (Exception ex)
+            {
+                return new ErrorResult(Messages.ProductCouldNotBeDeleted);
+            }
         }
     }
 }
