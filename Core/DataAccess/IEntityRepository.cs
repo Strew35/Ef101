@@ -1,10 +1,5 @@
-﻿using Core.Entities;    
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Core.Entities;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.DataAccess
 {
@@ -12,9 +7,9 @@ namespace Core.DataAccess
     /// IEntity class'ından miras alan Entity nesneleri için üretilecek Dal sınıflarında kullanılmak üzere oluşturulmuştur.
     /// </summary>
     /// <typeparam name="T">EntityNesnesi</typeparam>
-    public interface IEntityRepository<TEntity> where TEntity : class,IEntity ,new()
+    public interface IEntityRepository<TEntity> where TEntity : class, IEntity, new()
     {
-        List<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter=null);
+        List<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter = null);
         TEntity Get(Expression<Func<TEntity, bool>> filter);
         void Add(TEntity entity);
         void Update(TEntity entity);

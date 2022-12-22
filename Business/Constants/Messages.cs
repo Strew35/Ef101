@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Constants
+﻿namespace Business.Constants
 {
     public static class Messages
     {
@@ -21,13 +15,18 @@ namespace Business.Constants
         public static string ProductCouldNotBeUpdated = "Ürün güncellenemedi.";
         public static string ProductDeleted = "Ürün silindi.";
         public static string ProductCouldNotBeDeleted = "Ürün silinemedi.";
-        public static string ProductsListed ="Ürünler listelendi.";
-        public static string ProductsCouldNotBeListed ="Ürünler listelenemedi.";
+        public static string ProductsListed = "Ürünler listelendi.";
+        public static string ProductsCouldNotBeListed = "Ürünler listelenemedi.";
         public static string ProductListed = "Ürün listelendi.";
         public static string ProductCouldNotBeListed = "Ürün listelenemedi.";
+        /* Business Controls */
+        public static string ProductCountOfCategoryError = "İlgili kategoride belirlenen ürün limitine erişildi.";
+        public static string ProductNameDuplicationError = "Aynı isimde birden fazla ürün olamaz.";
 
         /* Category */
         public static string CategoriesListed = "Kategoriler listelendi.";
         public static string CategoryListed = "Kategori listelendi.";
+        /* Business Controls */
+        public static string CategoryLimitExceed = "Kategori için verilen sınır aşıldı.";
     }
 }

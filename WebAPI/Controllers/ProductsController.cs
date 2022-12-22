@@ -1,13 +1,7 @@
 ﻿using Business.Abstract;
-using Business.Concrete;
-using Core.Concrete.EntityFramework;
 using Core.Utilities.Results.Abstract;
-using Core.Utilities.Results.Concrete;
 using Entities.Concrete;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
-using System.Net.Http.Headers;
 
 namespace WebAPI.Controllers
 {
